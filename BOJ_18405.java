@@ -17,12 +17,13 @@ public class BOJ_18405 {
         int[][] MAP = new int[N+2][N+2];
         PriorityQueue<Pair> A = new PriorityQueue<>(new Comparator<Pair>() {
             @Override
-            public int compare(BOJ_18405.Pair o1, BOJ_18405.Pair o2) {
+            public int compare(BOJ_18405.Pair o1, BOJ_18405.Pair o2) { // 오름차순 정렬
                 return o1.key - o2.key;
             }
         });
-        int[] move_i = {-1, 1, 0, 0};
-        int[] move_j = {0, 0, -1, 1};
+        int[] move_i = {0, 0, -1, 1};
+        int[] move_j = {-1, 1, 0, 0};
+        for(int i=0; i<=N; i++) {MAP[0][i] = MAP[i][0] = MAP[N+1][i] = MAP[i][N+1] = -1;} // 가장자리 : -1
 
         int num;
         ArrayList<Pair> B = new ArrayList<>();
@@ -33,55 +34,70 @@ public class BOJ_18405 {
                 num = Integer.parseInt(st.nextToken());
                 if(num != 0){
                     pair = new Pair(num, i, j);
-                    B.add(pair);
+                    A.add(pair);
                 }
                 MAP[i][j] = num; 
             }
         }
-        while(B.size() > 0){
-            A.add(B.remove(0));
-        }
+        while(A.size() > 0){ B.add(A.poll());}
 
-
-        for(int i=0; i<=N; i++) {MAP[0][i] = MAP[i][0] = MAP[N+1][i] = MAP[i][N+1] = -1;} // 가장자리 : -1
         st = new StringTokenizer(br.readLine());
         int S = Integer.parseInt(st.nextToken());
         int X = Integer.parseInt(st.nextToken());
         int Y = Integer.parseInt(st.nextToken());
 
-        int next_i, next_j;
+        int next_i, next_j, s;
         Pair p, q;
+        int depth=1;
 
-        for(int i=1; i<=S; i++){
+        if(S==0){
+            bw.write(String.valueOf(MAP[X][Y]));
+            bw.flush();
+            return;
+        }
+        if(MAP[X][Y] != 0){
+            bw.write(String.valueOf(MAP[X][Y]));
+            bw.flush();
+            return;
+        }
 
-            while(A.size() > 0){
-                p = A.poll();
-                for(int k=0; k<4; k++){
+        while(B.size() > 0 && depth <= S){ // depth 관리를 어떻게 할 것인지.
+            s = B.size();
+            for(int i=0; i<s; i++){
+                p = B.remove(0);
+                for (int k = 0; k < 4; k++) { // Queue의 헤드마다 상하좌우 체크
                     next_i = p.y + move_i[k];
                     next_j = p.x + move_j[k];
     
-                    if(MAP[next_j][next_i] != 0) continue;
-                    q = new Pair(p.key, next_i, next_j);
+                    if (MAP[next_j][next_i] != 0) continue; 
+                    q = new Pair(p.key, next_j, next_i); // 0이 있으므로 바이러스가 할당됨
                     MAP[next_j][next_i] = p.key;
     
-                    if(q.x == Y && q.y == X){
+                    if (q.y == Y && q.x == X) {
+                        // System.out.println();
+                        // for (int e = 1; e <= N; e++) {
+                        //     for (int u = 1; u <= N; u++) {
+                        //         System.out.print(MAP[e][u] + " ");
+                        //     }
+                        //     System.out.println();
+                        // }
                         bw.write(String.valueOf(q.key));
                         bw.flush();
                         return;
                     }
                     B.add(q);
+                    // System.out.println();
+                    // for (int e = 1; e <= N; e++) {
+                    //     for (int u = 1; u <= N; u++) {
+                    //         System.out.print(MAP[e][u] + " ");
+                    //     }
+                    //     System.out.println();
+                    // }
                 }
             }
-            // for(int e=1; e<=N; e++){
-            //     for(int u=1; u<=N; u++){
-            //         System.out.print(MAP[e][u] + " ");
-            //     }
-            // }
-            // for문 끝나고 한번에 PQ에 다 넣기
-            while(B.size() > 0){
-                A.add(B.remove(0));
-            }
+            depth++;
         }
+
         bw.write(String.valueOf(0));
         bw.flush();
     }
