@@ -35,16 +35,17 @@ public class Main {
             for(int j=0; j<M; j++) Map[i][j] = Integer.parseInt(st.nextToken());
         }
 
-        Solve();
-    }
-
-    static void Solve() {
-        ans = 0;
         for(int i=0; i<N; i++){
             Arrays.fill(MinusMap[i], 0);
             Arrays.fill(Visit1[i], false);
             Arrays.fill(Visit2[i], false);
         }
+
+        Solve();
+    }
+
+    static void Solve() {
+
         while(isUnion()){ /* 한 덩어리인 동안 */ 
             for(int i=0; i<N; i++){
                 Arrays.fill(MinusMap[i], 0);
@@ -78,12 +79,12 @@ public class Main {
                     continue;
                 }
                 
-                for (Pair p : Q) {
+                for (Pair p : Q) /* 대기 중인 큐에 중복 삽입 방지 */
                     if(p.i == next_i && p.j == next_j) {
                         c = true;
                         break;
                     }
-                }
+                
                 if(c) continue;
                 Q.add(new Pair(next_i, next_j));
             }
@@ -107,7 +108,7 @@ public class Main {
                 first = new Pair(i, j);
                 break;
             }
-            if(check) break;
+            if(check) return first;
         }
         return first;
     }
@@ -142,7 +143,6 @@ public class Main {
                 if(!Visit2[i][j] && Map[i][j] > 0) return false;
             }
         }
-
         return true;
     }
 
@@ -153,21 +153,5 @@ public class Main {
             this.j = j;
         }
     }
-
-    /* 
-    static void print_Map_Debug(){
-        for(int i=0; i<N; i++){
-            for(int j=0; j<M; j++) System.out.print(Map[i][j] + " ");
-            System.out.println();
-        }
-    }
-
-    static void print_Visit_Debug(){
-        for(int i=0; i<N; i++){
-            for(int j=0; j<M; j++) System.out.print(Visit1[i][j] + " ");
-            System.out.println();
-        }
-    }
-    */
 
 }
