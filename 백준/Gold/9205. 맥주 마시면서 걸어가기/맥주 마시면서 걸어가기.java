@@ -8,14 +8,12 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
-    /* Input */
     static int T, N;
     static Pair Home, Dest; // 집, 도착지
     static ArrayList<Pair> Conv; // 편의점
     static Queue<Pair> queue;
     static StringTokenizer st;
     static BufferedReader br;
-    static int MIN = -32769;
     public static void main(String[] args) throws IOException {
         br = new BufferedReader(new InputStreamReader(System.in));
         T = Integer.parseInt(br.readLine());
@@ -52,7 +50,6 @@ public class Main {
         N = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
         Home = new Pair(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
-        
         
         Conv = new ArrayList<>();
         for(int k=0; k<N; k++){
