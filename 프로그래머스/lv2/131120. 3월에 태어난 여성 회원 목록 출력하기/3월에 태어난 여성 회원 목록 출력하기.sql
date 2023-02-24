@@ -1,0 +1,4 @@
+Select MEMBER_ID, MEMBER_NAME, GENDER, DATE_FORMAT(DATE_OF_BIRTH, '%Y-%m-%d') DATE_OF_BIRTH
+From MEMBER_PROFILE 
+Where (TLNO Is Not Null) And (Month(DATE_OF_BIRTH)='3') And Gender='W'
+Order by MEMBER_ID
