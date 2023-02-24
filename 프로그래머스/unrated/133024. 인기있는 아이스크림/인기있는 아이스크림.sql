@@ -1,0 +1,3 @@
+Select FLAVOR
+From FIRST_HALF 
+Order by TOTAL_ORDER Desc, SHIPMENT_ID
