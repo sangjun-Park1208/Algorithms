@@ -1,0 +1,5 @@
+Select NAME, Count(NAME) COUNT
+From ANIMAL_INS 
+Group by NAME
+Having Count(NAME)>1
+Order by NAME
