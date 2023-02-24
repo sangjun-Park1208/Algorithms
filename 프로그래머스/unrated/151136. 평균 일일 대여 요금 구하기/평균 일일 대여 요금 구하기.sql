@@ -1,0 +1,3 @@
+Select round(avg(DAILY_FEE), 0) AVERAGE_FEE 
+From CAR_RENTAL_COMPANY_CAR
+Where CAR_TYPE='SUV';
