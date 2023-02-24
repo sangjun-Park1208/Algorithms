@@ -1,0 +1,3 @@
+SELECT *
+From ANIMAL_INS 
+Order by ANIMAL_ID
