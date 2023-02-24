@@ -1,0 +1,4 @@
+Select FACTORY_ID, FACTORY_NAME, ADDRESS
+From FOOD_FACTORY 
+Where ADDRESS Like '%강원도%'
+Order by FACTORY_ID
