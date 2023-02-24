@@ -1,0 +1,6 @@
+Select F.FLAVOR
+From FIRST_HALF F
+    Join ICECREAM_INFO I
+    On F.FLAVOR=I.FLAVOR
+Where F.TOTAL_ORDER > 3000 And I.INGREDIENT_TYPE='fruit_based'
+Order by F.TOTAL_ORDER Desc
