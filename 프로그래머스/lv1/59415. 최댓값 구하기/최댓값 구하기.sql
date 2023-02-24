@@ -1,0 +1,3 @@
+Select DATETIME As 시간
+From ANIMAL_INS
+Where DATETIME=(Select Max(A.DATETIME) From ANIMAL_INS A)
