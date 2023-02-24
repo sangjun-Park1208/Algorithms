@@ -1,0 +1,8 @@
+-- 코드를 입력하세요
+Select 
+    CAR_ID, 
+    round(avg(DATEDIFF(END_DATE, START_DATE)+1), 1) as AVERAGE_DURATION
+From CAR_RENTAL_COMPANY_RENTAL_HISTORY
+Group by CAR_ID
+Having AVERAGE_DURATION >= 7
+Order by AVERAGE_DURATION desc, CAR_ID desc
