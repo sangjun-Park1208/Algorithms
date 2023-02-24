@@ -1,0 +1,9 @@
+Select B.CATEGORY CATEGORY, Sum(SALES) TOTAL_SALES
+From BOOK B
+    Join BOOK_SALES S
+    On B.BOOK_ID=S.BOOK_ID
+Where DATE_FORMAT(S.SALES_DATE, '%Y-%m')='2022-01'
+Group by B.CATEGORY
+Order by B.CATEGORY;
+
+# Select Count(*) from BOOK_SALES Where DATE_FORMAT(SALES_DATE, '%Y-%m')='2022-01'
